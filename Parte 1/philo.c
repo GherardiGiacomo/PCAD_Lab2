@@ -10,6 +10,7 @@
 
 my_semaphore bacchette[NUMERO_FILOSOFI];
 my_semaphore sala_attesa;
+//my_semaphore sala_mutex;
 
 int n_sala[NUMERO_FILOSOFI] = {0};
 int mangiato[NUMERO_FILOSOFI] = {0}; // Array di contatori, serve per contare quante volte ha mangiato ogni filosofo
@@ -21,17 +22,10 @@ void* filosofo(void* n) {
         printf("Filosofo %d: sta pensando\n", id);
         
         my_sem_wait(&sala_attesa);
-        n_sala[id]=0;
-        printf("La sala d'attesa è attualmente composta dai filosofi: ");
-        for(int i=0; i< NUMERO_FILOSOFI; i++){
-            if(n_sala[i] == 1){
-                printf("%d ", i);
-            }
-        }
         my_sem_wait(&bacchette[id]);
         my_sem_wait(&bacchette[(id+1)%NUMERO_FILOSOFI]);
 
-        printf("Filosofo %d: ha la sua bacchetta sinistra\n", id);
+        printf("\nFilosofo %d: ha la sua bacchetta sinistra\n", id);
         printf("Filosofo %d: ha la sua bacchetta destra\n", id);
         printf("\nFilosofo %d: sta mangiando\n\n", id);
         
@@ -40,10 +34,19 @@ void* filosofo(void* n) {
         mangiato[id]++;
         printf("\nFilosofo %d: ha mangiato %d volte\n\n", id, mangiato[id]); // Stampo il numero di volte che il filosofo ha mangiato
         
+        //my_sem_wait(&sala_mutex);
+
+        n_sala[id]=0; //il filosofo va a mangiare
+        printf("La sala d'attesa e' attualmente composta dai filosofi: \n");
+        for(int i=0; i< NUMERO_FILOSOFI; i++){
+            if(n_sala[i] == 1){
+                printf("%d ", i);
+            }
+        }
+        //my_sem_signal(&sala_mutex);
         my_sem_signal(&bacchette[id]);
         my_sem_signal(&bacchette[(id+1)%NUMERO_FILOSOFI]);
         my_sem_signal(&sala_attesa);
-
         printf("Filosofo %d: ha rilasciato le sue due bacchette\n", id);
         }
         my_sem_signal(&bacchette[id]);
