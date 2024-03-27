@@ -1,4 +1,5 @@
 #include <pthread.h>
+
 typedef struct my_semaphore{ 
     volatile unsigned int V; 
     pthread_mutex_t lock; 
