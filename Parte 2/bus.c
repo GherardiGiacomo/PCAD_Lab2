@@ -19,9 +19,9 @@ void *bus (void *arg) {
         pthread_mutex_lock(&mutex_bus);
         while(count < C)
             pthread_cond_wait(&cond_bus_pieno, &mutex_bus);
-        printf("\n\nIl bus è pieno, partiamo!\n\n");
+        printf("\n\nIl bus e' pieno, partiamo!\n\n");
         usleep(1000000);
-        printf("\nIl bus è ritornato \n");
+        printf("\nIl bus e' ritornato \n");
         pthread_cond_broadcast(&cond_bus_ritornato);
         count = 0;
         pthread_cond_broadcast(&cond_bus_vuoto);
@@ -36,14 +36,14 @@ void *passenger(void* arg) {
         while(count == C)
             pthread_cond_wait(&cond_bus_vuoto, &mutex_passeggero);
         count++;
-        printf("\nPasseggero %d è salito sul bus\n", *(int*)arg);
+        printf("\nPasseggero %d e' salito sul bus\n", *(int*)arg);
         if (count == C)
             pthread_cond_signal(&cond_bus_pieno);
         pthread_mutex_unlock(&mutex_passeggero);
 
         pthread_mutex_lock(&mutex_passeggero);
         pthread_cond_wait(&cond_bus_ritornato, &mutex_passeggero);
-        printf("\nPasseggero %d è sceso dal bus\n", *(int*)arg);
+        printf("\nPasseggero %d e' sceso dal bus\n", *(int*)arg);
         pthread_mutex_unlock(&mutex_passeggero);
 
         usleep(1000000); // Tempo di attesa prima del controllo dei posti
