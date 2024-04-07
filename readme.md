@@ -1,13 +1,16 @@
 # PCAD 23/24 - Laboratorio 2
 
-# 1 Semafori
+# 1 Semafori 
+
+```
+                      IMPORTANTE: compilare con gcc -o a philo.c my_semaphore.c -lpthread ed eseguire ./a
+```
 
 Lo scopo di questo esercizio è di farvi implementare semafori in C. Scrivete in un header file my_semaphore.h la struttura di dati e le prototipe come indicato sotto:
 
 ```cpp
 #include <pthread.h>
-```
-```cpp
+
 typedef struct my_semaphore{
 volatile unsigned int V;
 pthread_mutex_t lock;
