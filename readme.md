@@ -2,8 +2,7 @@
 
 # 1 Semafori
 
-Lo scopo di questo esercizio è di farvi implementare semafori in C. Scrivete in un header file my_semaphore.h la struttura di dati
-e le prototipe come indicato sotto:
+Lo scopo di questo esercizio è di farvi implementare semafori in C. Scrivete in un header file my_semaphore.h la struttura di dati e le prototipe come indicato sotto:
 
 ```cpp
 #include <pthread.h>
@@ -27,13 +26,11 @@ int my_sem_signal(my_semaphore ⁎ms);
 ```cpp
 int my_sem_destroy(my_semaphore ⁎ms);
 ```
-Vi chiediamo di implementare in un filemy_semaphore.cle funzionemy_sem_init,my_sem_wait,my_sem_signalemy_sem_
-destroye di testarli in un programma che metterete in un altro file, per esempio implementando la soluzione dei filosofi con
-un salla d’attesa.
+Vi chiediamo di implementare in un filemy_semaphore.c, le funzionemy_sem_init, my_sem_wait, my_sem_signalemy_sem_destroy e di testarli in un programma che metterete in un altro file, per esempio implementando la soluzione dei filosofi con un sala d’attesa.
 
-Per la semantica delle due ultime funzione my_sem_init e my_sem_wait è quella dei (weak) semafori presentati a lezione. Per
-quanto riguardamy_sem_init, inizializza i vari campi di un semaforo emy_sem_destroylibera i campi (chiamando le funzione
-pthread_mutex_destroyepthread_cond_destroy). Ciascuna di queste tre funzione ritorna 0, se tutto è andato a buon fine,
+Per la semantica delle due ultime funzione my_sem_init e my_sem_wait è quella dei (weak) semafori presentati a lezione. Per quanto riguardamy_sem_init, inizializza i vari campi di un semaforo emy_sem_destroy libera i campi (chiamando le funzione pthread_mutex_destroy e pthread_cond_destroy).
+
+Ciascuna di queste tre funzione ritorna 0, se tutto è andato a buon fine.
 
 # 2 Problema del bus
 
