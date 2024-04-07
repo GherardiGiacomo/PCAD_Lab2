@@ -1,4 +1,4 @@
-#include "my_semaphore.c"
+#include "my_semaphore.h"
 #include <pthread.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -22,6 +22,7 @@ void* filosofo(void* n) {
         printf("Filosofo %d: sta pensando\n", id);
         
         my_sem_wait(&sala_attesa);
+        n_sala[id]=1;
         my_sem_wait(&bacchette[id]);
         my_sem_wait(&bacchette[(id+1)%NUMERO_FILOSOFI]);
 
@@ -36,17 +37,15 @@ void* filosofo(void* n) {
         my_sem_signal(&bacchette[(id+1)%NUMERO_FILOSOFI]);
         
         my_sem_wait(&sala_mutex);
-        n_sala[id]=1; //il filosofo è in sala d'attesa
-        printf("Filosofo %d: ha rilasciato le sue due bacchette e si trova in sala d'attesa\n", id);
-        printf("La sala d'attesa e' attualmente composta dai filosofi: ");
+        n_sala[id]=0; //il filosofo esce nella sala d'attesa
+        printf("\nLa sala d'attesa e' attualmente composta dai filosofi: \n");
         for(int i=0; i< NUMERO_FILOSOFI; i++){
             if(n_sala[i] == 1){
                 printf("%d ", i);
+                }
             }
-        }
-        printf("\n");
+        printf("\n\n"); 
         my_sem_signal(&sala_mutex);
-
         my_sem_signal(&sala_attesa);
     }
     return NULL;
