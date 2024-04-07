@@ -56,8 +56,3 @@ verrà ripresentato da un thread. Ovviamente per testare vostra implementazione,
 
 **Indicazioni:** Potete usare un contatore condiviso per contarre il numero di persone salite nel bus e dovete chiedervi chi
 deve ’svegliare’ le entità in attesa (ad esempio l’ultimo passeggero a salire nel bus sveglierà il bus in attesa).
-
-# 3 Consegna
-
-Per la consegna, creare unozipcon tutti vostri file. Lozipdovrà anche contenere un fileparticipanti.txtdove gli nomi di
-chi ha participato alla consegna (questo anche se siete da solo a farla).
